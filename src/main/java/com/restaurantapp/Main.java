@@ -5,16 +5,13 @@ public class Main {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver" );
             Connection connection = DriverManager.getConnection(
-                    "jdbc:mysql://std-mysql.ist.mospolytech.ru:22/std_2313_test" ,
-                    "std_2313_test" , "12345678" );
+                    "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2313_vine" ,
+                    "std_2313_vine" , "12345678" );
             Statement statement = connection.createStatement();
-            String query = "SELECT * FROM `author`;" ;
+            String query = "SELECT name FROM vine_type;" ;
             ResultSet result = statement.executeQuery(query);
             while(result.next()){
-                int id = result.getInt(" author_id " );
-                String name = result.getString(" name_author " );
-                System.out.print(" Vacant post: " );
-                System.out.print(" id = " + id);
+                String name = result.getString("name" );
                 System.out.print(" , name = \" " + name + " \" " );
             }
             connection.close();
@@ -22,5 +19,6 @@ public class Main {
         catch(Exception e){
             System.out.println(e);
         }
+
     }
 }

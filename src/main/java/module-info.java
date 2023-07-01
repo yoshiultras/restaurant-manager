@@ -7,6 +7,6 @@ module com.restaurantapp {
     requires java.sql;
     requires mysql.connector.java;
 
-    opens com.restaurantapp to javafx.fxml;
+    opens com.restaurantapp.controllers to javafx.fxml;
     exports com.restaurantapp;
 }
