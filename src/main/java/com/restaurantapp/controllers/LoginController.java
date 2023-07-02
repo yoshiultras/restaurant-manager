@@ -22,7 +22,7 @@ public class LoginController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private UserService userService = new UserService();
+    private UserService userService;
     private String username;
     private String password;
     @FXML
@@ -31,8 +31,11 @@ public class LoginController {
     private PasswordField passwordText;
     @FXML
     private Label label;
-
+    public void init(UserService userService) {
+        this.userService = userService;
+    }
     public void login(ActionEvent event) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        if(userService == null) userService = new UserService();
         username = usernameText.getText();
         password = passwordText.getText();
         User user = userService.userLogin(username, password);
@@ -58,6 +61,14 @@ public class LoginController {
                 setScene(root, event);
                 break;
         }
+    }
+    public void toRegistration(ActionEvent event) throws IOException {
+        if(userService == null) userService = new UserService();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("registration.fxml"));
+        root = loader.load();
+        RegisterController registerController = loader.getController();
+        registerController.init(userService);
+        setScene(root, event);
     }
     private void setScene(Parent root, ActionEvent event) {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

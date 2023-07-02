@@ -9,4 +9,5 @@ module com.restaurantapp {
 
     opens com.restaurantapp.controllers to javafx.fxml;
     exports com.restaurantapp;
+    exports com.restaurantapp.controllers;
 }

@@ -1,5 +1,6 @@
-package com.restaurantapp;
+package com.restaurantapp.controllers;
 
+import com.restaurantapp.DatabaseConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

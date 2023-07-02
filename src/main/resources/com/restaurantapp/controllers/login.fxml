@@ -13,6 +13,7 @@
       <TextField fx:id="usernameText" layoutX="226.0" layoutY="122.0" />
       <Label layoutX="226.0" layoutY="105.0" text="Логин" />
       <Label layoutX="226.0" layoutY="147.0" text="Пароль" />
-      <Label fx:id="label" layoutX="207.0" layoutY="236.0" prefHeight="17.0" prefWidth="187.0" textFill="RED" />
+      <Label fx:id="label" alignment="TOP_CENTER" layoutX="22.0" layoutY="236.0" prefHeight="17.0" prefWidth="558.0" textAlignment="CENTER" textFill="RED" />
+      <Button layoutX="258.0" layoutY="336.0" mnemonicParsing="false" onAction="#toRegistration" text="Регистрация" />
    </children>
 </AnchorPane>

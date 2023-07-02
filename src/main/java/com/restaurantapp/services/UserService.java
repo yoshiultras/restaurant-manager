@@ -13,7 +13,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Arrays;
 
 public class UserService {
     private Connection connection;
@@ -22,10 +21,14 @@ public class UserService {
         connection = DatabaseConnector.getConnection();
     }
 
-    public boolean addUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        if(!username.matches("[A-Za-z0-9]+") || !password.matches("[A-Za-z0-9]+")) return false;
-        User user = new User(username, passwordHashing(password));
-        return true;
+    public User addUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+        if(exists(username)) return null;
+        Statement statement = connection.createStatement();
+        password = passwordHashing(password);
+        String query = "INSERT INTO login(username, password, role, id) VALUES ('" + username + "', '" + password + "', 0, NULL)";
+        statement.executeUpdate(query);
+        User user = new User(username, password, 0);
+        return user;
     }
     public void changeName(User user, String newName) throws SQLException {
         String username = user.getUsername();
@@ -41,6 +44,12 @@ public class UserService {
         Statement statement = connection.createStatement();
         String query = "UPDATE login SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
         statement.executeUpdate(query);
+    }
+    public boolean exists(String username) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT username, password, role FROM login WHERE username = '" + username + "';";
+        ResultSet result = statement.executeQuery(query);
+        return result.next();
     }
 
     public User userLogin(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -68,7 +77,5 @@ public class UserService {
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
         UserService us = new UserService();
         System.out.println(us.passwordHashing("1234"));
-        System.out.println(us.addUser("nik", "1234"));
-
     }
 }
