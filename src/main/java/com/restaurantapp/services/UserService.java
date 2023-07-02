@@ -27,23 +27,42 @@ public class UserService {
         User user = new User(username, passwordHashing(password));
         return true;
     }
-
-    public int userLogin(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
-        if(!username.matches("[A-Za-z0-9]+") || !password.matches("[A-Za-z0-9]+")) return 0;
+    public void changeName(User user, String newName) throws SQLException {
+        String username = user.getUsername();
+        String password = user.getPassword();
         Statement statement = connection.createStatement();
-        String query = "SELECT role FROM login WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
-        ResultSet result = statement.executeQuery(query);
-        if(!result.next()) return 0;
-        return result.getInt("role");
+        String query = "UPDATE login SET username = '" + newName + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        statement.executeUpdate(query);
+    }
+    public void changePassword(User user, String newPassword) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+        String username = user.getUsername();
+        String password = user.getPassword();
+        newPassword = passwordHashing(newPassword);
+        Statement statement = connection.createStatement();
+        String query = "UPDATE login SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        statement.executeUpdate(query);
     }
 
-    private String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
+    public User userLogin(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
+        if(!username.matches("[A-Za-z0-9]+") || !password.matches("[A-Za-z0-9]+")) return null;
+        Statement statement = connection.createStatement();
+        String query = "SELECT username, password, role FROM login WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
+        ResultSet result = statement.executeQuery(query);
+        if(!result.next()) return null;
+        return new User(result.getString("username"), result.getString("password"), result.getInt("role"));
+    }
+
+    public String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         byte[] hash = factory.generateSecret(spec).getEncoded();
-        return Arrays.toString(hash);
+        StringBuilder stringBuilder = new StringBuilder();
+        for (byte b : hash) {
+            stringBuilder.append(b);
+        }
+        return stringBuilder.toString();
     }
 
     public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {

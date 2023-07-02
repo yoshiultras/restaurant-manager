@@ -13,5 +13,6 @@
       <TextField fx:id="usernameText" layoutX="226.0" layoutY="122.0" />
       <Label layoutX="226.0" layoutY="105.0" text="Логин" />
       <Label layoutX="226.0" layoutY="147.0" text="Пароль" />
+      <Label fx:id="label" layoutX="207.0" layoutY="236.0" prefHeight="17.0" prefWidth="187.0" textFill="RED" />
    </children>
 </AnchorPane>
