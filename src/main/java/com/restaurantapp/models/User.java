@@ -1,9 +1,12 @@
 package com.restaurantapp.models;
 
+import com.restaurantapp.services.UserService;
+
 public class User {
     private String username;
     private String password;
     private int role;
+    private static User INSTANCE;
 
     public User(String username, String password) {
         this.username = username;
@@ -14,6 +17,12 @@ public class User {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+    public static void login(User user) {
+        INSTANCE = user;
+    }
+    public static User getUser() {
+        return INSTANCE;
     }
 
     public String getUsername() {

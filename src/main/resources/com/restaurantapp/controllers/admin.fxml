@@ -1,101 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.restaurantapp.controllers.AdminController">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="1200.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Профиль">
-               <items>
-                  <MenuItem fx:id="profileButton" mnemonicParsing="false" onAction="#showProfile" text="Открыть профиль" />
-               </items></Menu>
-          <Menu mnemonicParsing="false" text="Заказы">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Поставки">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-      <Pane fx:id="profilePane" layoutX="14.0" layoutY="37.0" prefHeight="842.0" prefWidth="1169.0" visible="false">
-         <children>
-            <Label fx:id="nameLabel" alignment="TOP_CENTER" layoutX="459.0" layoutY="165.0" prefHeight="27.0" prefWidth="251.0" text="Label" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font></Label>
-            <Button fx:id="nameButton" layoutX="489.0" layoutY="359.0" mnemonicParsing="false" onAction="#changeName" text="Поменять имя">
-               <font>
-                  <Font size="24.0" />
-               </font></Button>
-            <Button fx:id="passwordButton" layoutX="472.0" layoutY="432.0" mnemonicParsing="false" onAction="#changePassword" text="Поменять пароль">
-               <font>
-                  <Font size="24.0" />
-               </font></Button>
-            <Label layoutX="518.0" layoutY="44.0" text="Профиль">
-               <font>
-                  <Font size="32.0" />
-               </font>
-            </Label>
-            <Label layoutX="559.0" layoutY="138.0" text="Логин">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="514.0" layoutY="232.0" text="Уровень доступа">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Pane fx:id="changePane" layoutX="484.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" visible="false">
-               <children>
-                  <TextField fx:id="passwordText" layoutX="13.0" layoutY="40.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <TextField fx:id="changeText" layoutX="14.0" layoutY="103.0">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </TextField>
-                  <Label layoutX="14.0" layoutY="20.0" text="Введите пароль">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="changeLabel" layoutX="14.0" layoutY="79.0" text="Label">
-                     <font>
-                        <Font size="14.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="errorLabel" layoutX="86.0" layoutY="134.0" prefHeight="17.0" prefWidth="23.0" textAlignment="CENTER" textFill="RED" />
-                  <Button fx:id="submitButton" layoutX="74.0" layoutY="161.0" mnemonicParsing="false" onAction="#submitChange" text="Вперед" />
-               </children>
-            </Pane>
-            <Label fx:id="changeSuccessLabel" layoutX="458.0" layoutY="509.0" text="Изменения сохранены" textFill="#1c8d00" visible="false">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
-            <Label fx:id="roleLabel" alignment="TOP_CENTER" layoutX="459.0" layoutY="259.0" prefHeight="27.0" prefWidth="251.0" text="Label" textAlignment="CENTER">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-         </children>
-      </Pane>
+      <Button fx:id="profileButton" layoutX="534.0" layoutY="129.0" mnemonicParsing="false" onAction="#showProfile" text="Профиль">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
+      <Button fx:id="accessButton" layoutX="497.0" layoutY="791.0" mnemonicParsing="false" onAction="#showAccess" text="Назначить роль">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

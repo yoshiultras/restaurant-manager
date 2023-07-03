@@ -21,7 +21,7 @@ public class RegisterController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private UserService userService;
+    private UserService userService = UserService.getInstance();
     @FXML
     private TextField usernameText;
     @FXML
@@ -30,10 +30,6 @@ public class RegisterController {
     private PasswordField passwordConfirmText;
     @FXML
     private Label label;
-
-    public void init(UserService userService) {
-        this.userService = userService;
-    }
 
     public void register(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException, IOException {
         String username = usernameText.getText();
@@ -55,8 +51,6 @@ public class RegisterController {
     public void toLogin(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
         root = loader.load();
-        LoginController loginController = loader.getController();
-        loginController.init(userService);
         setScene(root, event);
     }
     private void setScene(Parent root, ActionEvent event) {

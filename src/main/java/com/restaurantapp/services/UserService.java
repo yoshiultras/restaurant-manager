@@ -2,6 +2,8 @@ package com.restaurantapp.services;
 
 import com.restaurantapp.DatabaseConnector;
 import com.restaurantapp.models.User;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -14,14 +16,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UserService {
+public final class UserService {
     private Connection connection;
+    private final static UserService INSTANCE = new UserService();
 
     public UserService() {
         connection = DatabaseConnector.getConnection();
     }
+    public static UserService getInstance() {
+        return INSTANCE;
+    }
 
-    public User addUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+        public User addUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         if(exists(username)) return null;
         Statement statement = connection.createStatement();
         password = passwordHashing(password);
@@ -60,7 +66,20 @@ public class UserService {
         if(!result.next()) return null;
         return new User(result.getString("username"), result.getString("password"), result.getInt("role"));
     }
-
+    public ObservableList<User> getUsersLowerRole(User user) throws SQLException {
+        ObservableList<User> users = FXCollections.observableArrayList();
+        int role = user.getRole();
+        String username = user.getUsername();
+        Statement statement = connection.createStatement();
+        String query = "SELECT username, role FROM login WHERE username <> '" + username + "' AND role < '" + role + "';";
+        ResultSet result = statement.executeQuery(query);
+        while(result.next()){
+            String name = result.getString("username" );
+            int userRole = result.getInt("role");
+            users.add(new User(name, "0000", userRole));
+        }
+        return users;
+    }
     public String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
@@ -72,10 +91,5 @@ public class UserService {
             stringBuilder.append(b);
         }
         return stringBuilder.toString();
-    }
-
-    public static void main(String[] args) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        UserService us = new UserService();
-        System.out.println(us.passwordHashing("1234"));
     }
 }
