@@ -1,6 +1,5 @@
-package com.restaurantapp.services;
+package com.restaurantapp;
 
-import com.restaurantapp.DatabaseConnector;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -11,7 +10,7 @@ import java.io.IOException;
 public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("startup.fxml"));
         final int WIDTH = 600;
         final int HEIGHT = 400;
         Scene scene = new Scene(fxmlLoader.load(), WIDTH, HEIGHT);

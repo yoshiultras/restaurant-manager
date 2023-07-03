@@ -23,6 +23,7 @@ public final class ControllerService {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+        stage.centerOnScreen();
         return controller;
     }
 }

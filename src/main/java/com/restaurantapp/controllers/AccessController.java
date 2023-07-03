@@ -2,6 +2,7 @@ package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.User;
 import com.restaurantapp.services.ControllerService;
+import com.restaurantapp.services.DataService;
 import com.restaurantapp.services.UserService;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -38,6 +39,7 @@ public class AccessController implements Initializable, Controller {
     @FXML
     private TableColumn<User, String> roleColumn;
     UserService userService = UserService.getInstance();
+    DataService dataService = DataService.getInstance();
     private ControllerService controllerService = ControllerService.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -66,7 +68,7 @@ public class AccessController implements Initializable, Controller {
         });
         table.setEditable(true);
         try {
-            table.setItems(userService.getUsersLowerRole(user));
+            table.setItems(dataService.getUsersLowerRole(user));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

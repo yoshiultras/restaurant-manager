@@ -44,18 +44,8 @@ public class LoginController implements Controller {
         }
         User.login(user);
         String role = user.getRole();
-        switch (role){
-            case "0":
-                label.setText("Вам пока не выдана роль в системе");
-                break;
-            case "1":
-                break;
-            case "2":
-                break;
-            case "3":
-                controllerService.changeScene(stage, scene, root, event, "admin.fxml");
-                break;
-        }
+        if (role.equals("0")) label.setText("Вам пока не выдана роль в системе");
+        else controllerService.changeScene(stage, scene, root, event, "admin.fxml");
     }
     public void toRegistration(ActionEvent event) throws IOException {
         controllerService.changeScene(stage, scene, root, event, "registration.fxml");
