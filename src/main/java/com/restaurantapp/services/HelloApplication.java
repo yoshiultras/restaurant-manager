@@ -1,4 +1,4 @@
-package com.restaurantapp.controllers;
+package com.restaurantapp.services;
 
 import com.restaurantapp.DatabaseConnector;
 import javafx.application.Application;

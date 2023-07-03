@@ -12,4 +12,6 @@ module com.restaurantapp {
     exports com.restaurantapp;
     exports com.restaurantapp.controllers;
     exports com.restaurantapp.models;
+    exports com.restaurantapp.services;
+    opens com.restaurantapp.services to javafx.fxml;
 }

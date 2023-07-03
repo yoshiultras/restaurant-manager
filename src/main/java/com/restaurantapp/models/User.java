@@ -5,7 +5,7 @@ import com.restaurantapp.services.UserService;
 public class User {
     private String username;
     private String password;
-    private int role;
+    private String role;
     private static User INSTANCE;
 
     public User(String username, String password) {
@@ -13,7 +13,7 @@ public class User {
         this.password = password;
     }
 
-    public User(String username, String password, int role) {
+    public User(String username, String password, String role) {
         this.username = username;
         this.password = password;
         this.role = role;
@@ -33,7 +33,7 @@ public class User {
         return password;
     }
 
-    public int getRole() {
+    public String getRole() {
         return role;
     }
 
@@ -45,7 +45,7 @@ public class User {
         this.password = password;
     }
 
-    public void setRole(int role) {
+    public void setRole(String role) {
         this.role = role;
     }
 }

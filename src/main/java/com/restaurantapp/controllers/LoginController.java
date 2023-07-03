@@ -1,6 +1,7 @@
 package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.User;
+import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,11 +19,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
-public class LoginController {
+public class LoginController implements Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
     private UserService userService = UserService.getInstance();
+    private ControllerService controllerService = ControllerService.getInstance();
     private String username;
     private String password;
     @FXML
@@ -41,33 +43,22 @@ public class LoginController {
             return;
         }
         User.login(user);
-        int role = user.getRole();
+        String role = user.getRole();
         switch (role){
-            case 0:
+            case "0":
                 label.setText("Вам пока не выдана роль в системе");
                 break;
-            case 1:
+            case "1":
                 break;
-            case 2:
+            case "2":
                 break;
-            case 3:
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("admin.fxml"));
-                root = loader.load();
-                AdminController adminController = loader.getController();
-                setScene(root, event);
+            case "3":
+                controllerService.changeScene(stage, scene, root, event, "admin.fxml");
                 break;
         }
     }
     public void toRegistration(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("registration.fxml"));
-        root = loader.load();
-        RegisterController registerController = loader.getController();
-        setScene(root, event);
+        controllerService.changeScene(stage, scene, root, event, "registration.fxml");
     }
-    private void setScene(Parent root, ActionEvent event) {
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
+
 }

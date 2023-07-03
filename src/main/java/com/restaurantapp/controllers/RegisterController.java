@@ -1,5 +1,6 @@
 package com.restaurantapp.controllers;
 
+import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,11 +18,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
-public class RegisterController {
+public class RegisterController implements Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
     private UserService userService = UserService.getInstance();
+    private ControllerService controllerService = ControllerService.getInstance();
     @FXML
     private TextField usernameText;
     @FXML
@@ -49,14 +51,6 @@ public class RegisterController {
         }
     }
     public void toLogin(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("login.fxml"));
-        root = loader.load();
-        setScene(root, event);
-    }
-    private void setScene(Parent root, ActionEvent event) {
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        controllerService.changeScene(stage, scene, root, event, "login.fxml");
     }
 }

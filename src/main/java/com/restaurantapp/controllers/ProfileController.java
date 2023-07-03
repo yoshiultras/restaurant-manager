@@ -1,6 +1,7 @@
 package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.User;
+import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,29 +19,20 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
-public class ProfileController {
+public class ProfileController implements Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
     @FXML
-    private Pane profilePane;
-    @FXML
     private Pane changePane;
     @FXML
-    private Label nameLabel;
-    @FXML
-    private Label roleLabel;
-    @FXML
-    private Label errorLabel;
-    @FXML
-    private Label changeLabel;
+    private Label nameLabel, roleLabel, errorLabel, changeLabel;
     @FXML
     public Label changeSuccessLabel;
     @FXML
-    private TextField passwordText;
-    @FXML
-    private TextField changeText;
+    private TextField passwordText, changeText;
     private UserService userService = UserService.getInstance();
+    private ControllerService controllerService = ControllerService.getInstance();
     private User user = User.getUser();
     private boolean passwordChange;
 
@@ -48,14 +40,8 @@ public class ProfileController {
         nameLabel.setText(user.getUsername());
         roleLabel.setText(user.getRole() + "");
     }
-    public void back(ActionEvent e) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("admin.fxml"));
-        root = loader.load();
-        AdminController adminController = loader.getController();
-        stage = (Stage)((Node)e.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    public void back(ActionEvent event) throws IOException {
+        controllerService.changeScene(stage, scene, root, event, "admin.fxml");
     }
     public void changeName() {
         errorLabel.setText("");

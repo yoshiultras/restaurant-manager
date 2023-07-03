@@ -33,7 +33,7 @@ public final class UserService {
         password = passwordHashing(password);
         String query = "INSERT INTO login(username, password, role, id) VALUES ('" + username + "', '" + password + "', 0, NULL)";
         statement.executeUpdate(query);
-        User user = new User(username, password, 0);
+        User user = new User(username, password, "0");
         return user;
     }
     public void changeName(User user, String newName) throws SQLException {
@@ -64,21 +64,26 @@ public final class UserService {
         String query = "SELECT username, password, role FROM login WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
         ResultSet result = statement.executeQuery(query);
         if(!result.next()) return null;
-        return new User(result.getString("username"), result.getString("password"), result.getInt("role"));
+        return new User(result.getString("username"), result.getString("password"), result.getInt("role") + "");
     }
     public ObservableList<User> getUsersLowerRole(User user) throws SQLException {
         ObservableList<User> users = FXCollections.observableArrayList();
-        int role = user.getRole();
+        String role = user.getRole();
         String username = user.getUsername();
         Statement statement = connection.createStatement();
         String query = "SELECT username, role FROM login WHERE username <> '" + username + "' AND role < '" + role + "';";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             String name = result.getString("username" );
-            int userRole = result.getInt("role");
+            String userRole = result.getInt("role") + "";
             users.add(new User(name, "0000", userRole));
         }
         return users;
+    }
+    public void updateRole(User user, String newRole) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "UPDATE login SET role = " + newRole + " WHERE username = '" + user.getUsername() + "';";
+        statement.executeUpdate(query);
     }
     public String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
         SecureRandom random = new SecureRandom();

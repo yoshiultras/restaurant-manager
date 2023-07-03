@@ -77,12 +77,8 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button fx:id="backButton" layoutX="54.0" layoutY="48.0" mnemonicParsing="false" onAction="#back" text="Назад">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Button>
          </children>
       </Pane>
+      <Button fx:id="backButton1" layoutX="40.0" layoutY="30.0" mnemonicParsing="false" onAction="#back" text="Назад" />
    </children>
 </AnchorPane>
