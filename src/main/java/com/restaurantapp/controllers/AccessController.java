@@ -4,17 +4,14 @@ import com.restaurantapp.models.User;
 import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.DataService;
 import com.restaurantapp.services.UserService;
-import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
@@ -29,7 +26,7 @@ public class AccessController implements Initializable, Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private User user = User.getUser();
+    private final User user = User.getUser();
     @FXML
     private Label errorLabel, roleLabel;
     @FXML
@@ -38,9 +35,8 @@ public class AccessController implements Initializable, Controller {
     private TableColumn<User, String> loginColumn;
     @FXML
     private TableColumn<User, String> roleColumn;
-    private UserService userService = UserService.getInstance();
-    private DataService dataService = DataService.getInstance();
-    private ControllerService controllerService = ControllerService.getInstance();
+    private final UserService userService = UserService.getInstance();
+    private final ControllerService controllerService = ControllerService.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         roleLabel.setText(user.getRole());
@@ -68,10 +64,8 @@ public class AccessController implements Initializable, Controller {
         });
         table.setEditable(true);
         try {
-            table.setItems(dataService.getUsersLowerRole(user));
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+            table.setItems(DataService.getUsersLowerRole(user));
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -79,10 +73,6 @@ public class AccessController implements Initializable, Controller {
         controllerService.changeScene(stage, scene, root, event, "admin.fxml");
     }
     private boolean acceptRole(String role) {
-        try {
-            return Integer.parseInt(user.getRole()) >= Integer.parseInt(role);
-        } catch (Exception e) {
-            throw e;
-        }
+        return Integer.parseInt(user.getRole()) >= Integer.parseInt(role);
     }
 }

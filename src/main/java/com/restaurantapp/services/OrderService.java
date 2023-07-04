@@ -3,7 +3,6 @@ package com.restaurantapp.services;
 import com.restaurantapp.DatabaseConnector;
 import com.restaurantapp.models.Dish;
 import com.restaurantapp.models.Dishes;
-import com.restaurantapp.models.Ingredient;
 import com.restaurantapp.models.Order;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,11 +11,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OrderService {
-    private Connection connection;
+    private final Connection connection;
     private final static OrderService INSTANCE = new OrderService();
 
     public OrderService() {

@@ -21,9 +21,9 @@ public class RegisterController implements Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private UserService userService = UserService.getInstance();
-    private ControllerService controllerService = ControllerService.getInstance();
-    private DataService dataService = DataService.getInstance();
+    private final UserService userService = UserService.getInstance();
+    private final ControllerService controllerService = ControllerService.getInstance();
+
     @FXML
     private TextField usernameText;
     @FXML
@@ -45,7 +45,7 @@ public class RegisterController implements Controller {
             return;
         }
         if (userService.addUser(username, password) != null) {
-            dataService.updateUsers();
+            DataService.updateUsers();
             toLogin(event);
         } else {
             label.setText("Данный логин занят");

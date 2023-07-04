@@ -5,8 +5,6 @@ import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -31,9 +29,9 @@ public class ProfileController implements Controller {
     public Label changeSuccessLabel;
     @FXML
     private TextField passwordText, changeText;
-    private UserService userService = UserService.getInstance();
-    private ControllerService controllerService = ControllerService.getInstance();
-    private User user = User.getUser();
+    private final UserService userService = UserService.getInstance();
+    private final ControllerService controllerService = ControllerService.getInstance();
+    private final User user = User.getUser();
     private boolean passwordChange;
 
     public void showInfo() {

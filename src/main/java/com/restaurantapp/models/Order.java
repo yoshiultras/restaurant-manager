@@ -1,9 +1,5 @@
 package com.restaurantapp.models;
 
-import javafx.collections.ObservableList;
-
-import java.util.List;
-
 public class Order {
     private Dishes dishes;
     private String date;

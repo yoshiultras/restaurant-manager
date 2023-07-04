@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class StockService {
-    private Connection connection;
+    private final Connection connection;
     private final static StockService INSTANCE = new StockService();
 
     public StockService() {

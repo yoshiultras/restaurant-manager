@@ -17,7 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public final class UserService {
-    private Connection connection;
+    private final Connection connection;
     private final static UserService INSTANCE = new UserService();
 
     public UserService() {

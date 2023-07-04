@@ -15,13 +15,9 @@ public final class DataService {
     private static ObservableList<User> usersLowerRole;
     private static ObservableList<Ingredient> ingredients;
     private static ObservableList<Order> orders;
-    private static UserService userService = UserService.getInstance();
-    private static StockService stockService = StockService.getInstance();
-    private static OrderService orderService = OrderService.getInstance();
-    private final static DataService INSTANCE = new DataService();
-    public static DataService getInstance() {
-        return INSTANCE;
-    }
+    private static final UserService userService = UserService.getInstance();
+    private static final StockService stockService = StockService.getInstance();
+    private static final OrderService orderService = OrderService.getInstance();
     public static ObservableList<User> getUsersLowerRole(User user) throws SQLException, IOException {
         if (usersLowerRole == null) {
             usersLowerRole = userService.getUsersLowerRole(user);

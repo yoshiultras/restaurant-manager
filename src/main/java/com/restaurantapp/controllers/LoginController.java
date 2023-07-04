@@ -5,8 +5,6 @@ import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -23,10 +21,8 @@ public class LoginController implements Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private UserService userService = UserService.getInstance();
-    private ControllerService controllerService = ControllerService.getInstance();
-    private String username;
-    private String password;
+    private final UserService userService = UserService.getInstance();
+    private final ControllerService controllerService = ControllerService.getInstance();
     @FXML
     private TextField usernameText;
     @FXML
@@ -34,8 +30,8 @@ public class LoginController implements Controller {
     @FXML
     private Label label;
     public void login(ActionEvent event) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException, IOException {
-        username = usernameText.getText();
-        password = passwordText.getText();
+        String username = usernameText.getText();
+        String password = passwordText.getText();
         User user = userService.userLogin(username, password);
         if(user == null) {
             passwordText.clear();

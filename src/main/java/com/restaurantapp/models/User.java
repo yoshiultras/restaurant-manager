@@ -1,7 +1,5 @@
 package com.restaurantapp.models;
 
-import com.restaurantapp.services.UserService;
-
 public class User {
     private String username;
     private String password;

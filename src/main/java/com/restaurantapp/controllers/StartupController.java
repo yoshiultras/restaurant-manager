@@ -19,7 +19,7 @@ public class StartupController implements Initializable, Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private ControllerService controllerService = ControllerService.getInstance();
+    private final ControllerService controllerService = ControllerService.getInstance();
     @FXML
     private Label messageLabel;
     @FXML

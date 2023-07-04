@@ -1,6 +1,5 @@
 package com.restaurantapp.controllers;
 
-import com.restaurantapp.models.Ingredient;
 import com.restaurantapp.models.Order;
 import com.restaurantapp.services.ControllerService;
 import com.restaurantapp.services.DataService;
@@ -23,8 +22,7 @@ public class OrdersController implements Initializable, Controller {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private DataService dataService = DataService.getInstance();
-    private ControllerService controllerService = ControllerService.getInstance();
+    private final ControllerService controllerService = ControllerService.getInstance();
     @FXML
     private TableView<Order> table;
     @FXML
@@ -41,10 +39,8 @@ public class OrdersController implements Initializable, Controller {
         dishColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("dishes"));
         tableColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("table"));
         try {
-            table.setItems(dataService.getOrders());
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+            table.setItems(DataService.getOrders());
+        } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
