@@ -2,7 +2,6 @@ package com.restaurantapp.services;
 
 import com.restaurantapp.DatabaseConnector;
 import com.restaurantapp.models.Ingredient;
-import com.restaurantapp.models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -33,5 +32,10 @@ public class StockService {
             ingredients.add(new Ingredient(name, unit, amount_in_stock));
         }
         return ingredients;
+    }
+    public void updateAmount(Ingredient ingredient, double newAmount) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "UPDATE ingredients SET amount_in_stock = " + newAmount + " WHERE name = '" + ingredient.getName() + "';";
+        statement.executeUpdate(query);
     }
 }

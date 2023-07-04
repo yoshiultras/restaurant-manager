@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -41,7 +43,7 @@ public class StockController implements Initializable, Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
         unitColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("unit"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, Double>("amount_in_stock"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, Double>("amount"));
         try {
             table.setItems(dataService.getIngredients());
         } catch (SQLException e) {

@@ -3,12 +3,12 @@ package com.restaurantapp.models;
 public class Ingredient {
     private String name;
     private String unit;
-    private double amount_in_stock;
+    private double amount;
 
-    public Ingredient(String name, String unit, double amount_in_stock) {
+    public Ingredient(String name, String unit, double amount) {
         this.name = name;
         this.unit = unit;
-        this.amount_in_stock = amount_in_stock;
+        this.amount = amount;
     }
 
     public String getName() {
@@ -27,11 +27,11 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public double getAmount_in_stock() {
-        return amount_in_stock;
+    public double getAmount() {
+        return amount;
     }
 
-    public void setAmount_in_stock(int amount_in_stock) {
-        this.amount_in_stock = amount_in_stock;
+    public void setAmount(int amount_in_stock) {
+        this.amount = amount_in_stock;
     }
 }
