@@ -31,7 +31,7 @@ public final class UserService {
         if(exists(username)) return null;
         Statement statement = connection.createStatement();
         password = passwordHashing(password);
-        String query = "INSERT INTO login(username, password, role, id) VALUES ('" + username + "', '" + password + "', 0, NULL)";
+        String query = "INSERT INTO users(username, password, role, id) VALUES ('" + username + "', '" + password + "', 0, NULL)";
         statement.executeUpdate(query);
         User user = new User(username, password, "0");
         return user;
@@ -40,7 +40,7 @@ public final class UserService {
         String username = user.getUsername();
         String password = user.getPassword();
         Statement statement = connection.createStatement();
-        String query = "UPDATE login SET username = '" + newName + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        String query = "UPDATE users SET username = '" + newName + "' WHERE username = '" + username + "' AND password = '" + password + "';";
         statement.executeUpdate(query);
     }
     public void changePassword(User user, String newPassword) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
@@ -48,12 +48,12 @@ public final class UserService {
         String password = user.getPassword();
         newPassword = passwordHashing(newPassword);
         Statement statement = connection.createStatement();
-        String query = "UPDATE login SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
+        String query = "UPDATE users SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
         statement.executeUpdate(query);
     }
     public boolean exists(String username) throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "SELECT username, password, role FROM login WHERE username = '" + username + "';";
+        String query = "SELECT username, password, role FROM users WHERE username = '" + username + "';";
         ResultSet result = statement.executeQuery(query);
         return result.next();
     }
@@ -61,7 +61,7 @@ public final class UserService {
     public User userLogin(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
         if(!username.matches("[A-Za-z0-9]+") || !password.matches("[A-Za-z0-9]+")) return null;
         Statement statement = connection.createStatement();
-        String query = "SELECT username, password, role FROM login WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
+        String query = "SELECT username, password, role FROM users WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
         ResultSet result = statement.executeQuery(query);
         if(!result.next()) return null;
         return new User(result.getString("username"), result.getString("password"), result.getInt("role") + "");
@@ -71,7 +71,7 @@ public final class UserService {
         String role = user.getRole();
         String username = user.getUsername();
         Statement statement = connection.createStatement();
-        String query = "SELECT username, role FROM login WHERE username <> '" + username + "' AND role < '" + role + "';";
+        String query = "SELECT username, role FROM users WHERE username <> '" + username + "' AND role < '" + role + "';";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             String name = result.getString("username" );
@@ -82,7 +82,7 @@ public final class UserService {
     }
     public void updateRole(User user, String newRole) throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "UPDATE login SET role = " + newRole + " WHERE username = '" + user.getUsername() + "';";
+        String query = "UPDATE users SET role = " + newRole + " WHERE username = '" + user.getUsername() + "';";
         statement.executeUpdate(query);
     }
     public String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {

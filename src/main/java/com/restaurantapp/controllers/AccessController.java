@@ -38,8 +38,8 @@ public class AccessController implements Initializable, Controller {
     private TableColumn<User, String> loginColumn;
     @FXML
     private TableColumn<User, String> roleColumn;
-    UserService userService = UserService.getInstance();
-    DataService dataService = DataService.getInstance();
+    private UserService userService = UserService.getInstance();
+    private DataService dataService = DataService.getInstance();
     private ControllerService controllerService = ControllerService.getInstance();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

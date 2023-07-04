@@ -39,6 +39,9 @@ public class AdminController implements Controller {
     public void showAccess(ActionEvent event) throws IOException {
         controllerService.changeScene(stage, scene, root, event, "access.fxml");
     }
+    public void showStock(ActionEvent event) throws IOException {
+        controllerService.changeScene(stage, scene, root, event, "stock.fxml");
+    }
     public void logout(ActionEvent event) throws IOException {
         controllerService.changeScene(stage, scene, root, event, "login.fxml");
     }
