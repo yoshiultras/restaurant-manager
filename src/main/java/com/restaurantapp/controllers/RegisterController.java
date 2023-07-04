@@ -1,6 +1,7 @@
 package com.restaurantapp.controllers;
 
 import com.restaurantapp.services.ControllerService;
+import com.restaurantapp.services.DataService;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,7 @@ public class RegisterController implements Controller {
     private Parent root;
     private UserService userService = UserService.getInstance();
     private ControllerService controllerService = ControllerService.getInstance();
+    private DataService dataService = DataService.getInstance();
     @FXML
     private TextField usernameText;
     @FXML
@@ -43,6 +45,7 @@ public class RegisterController implements Controller {
             return;
         }
         if (userService.addUser(username, password) != null) {
+            dataService.updateUsers();
             toLogin(event);
         } else {
             label.setText("Данный логин занят");

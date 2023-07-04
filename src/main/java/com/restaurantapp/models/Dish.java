@@ -11,6 +11,10 @@ public class Dish {
         this.name = name;
     }
 
+    public Dish(String name) {
+        this.name = name;
+    }
+
     public List<Ingredient> getIngredients() {
         return ingredients;
     }
@@ -27,5 +31,8 @@ public class Dish {
         this.name = name;
     }
 
-
+    @Override
+    public String toString() {
+        return name;
+    }
 }

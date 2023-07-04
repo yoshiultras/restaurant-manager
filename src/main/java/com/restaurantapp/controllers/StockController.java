@@ -33,7 +33,7 @@ public class StockController implements Initializable, Controller {
     @FXML
     private TableColumn<Ingredient, String> nameColumn, unitColumn;
     @FXML
-    private TableColumn<Ingredient, Double> amountColumn;
+    private TableColumn<Ingredient, String> amountColumn;
 
     public void back(ActionEvent event) throws IOException {
         controllerService.changeScene(stage, scene, root, event, "admin.fxml");
@@ -43,10 +43,12 @@ public class StockController implements Initializable, Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         nameColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("name"));
         unitColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("unit"));
-        amountColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, Double>("amount"));
+        amountColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("amount"));
         try {
             table.setItems(dataService.getIngredients());
         } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }

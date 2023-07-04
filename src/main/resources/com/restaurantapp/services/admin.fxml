@@ -2,30 +2,58 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.paint.Color?>
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.restaurantapp.controllers.AdminController">
    <children>
-      <Button layoutX="46.0" layoutY="165.0" mnemonicParsing="false" onAction="#showOrders" prefHeight="102.0" prefWidth="476.0" text="Заказы">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="900" stroke="BLACK" strokeType="INSIDE" width="600">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color green="0.5833333134651184" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Button fx:id="orderButton" layoutX="62.0" layoutY="166.0" mnemonicParsing="false" onAction="#showOrders" prefHeight="102.0" prefWidth="476.0" text="Заказы">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Button layoutX="46.0" layoutY="308.0" mnemonicParsing="false" onAction="#showStock" prefHeight="102.0" prefWidth="476.0" text="Склад">
+      <Button fx:id="stockButton" layoutX="62.0" layoutY="313.0" mnemonicParsing="false" onAction="#showStock" prefHeight="102.0" prefWidth="476.0" text="Склад">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="profileButton" layoutX="46.0" layoutY="450.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="102.0" prefWidth="476.0" text="Профиль">
+      <Button fx:id="profileButton" layoutX="62.0" layoutY="452.0" mnemonicParsing="false" onAction="#showProfile" prefHeight="102.0" prefWidth="476.0" text="Профиль">
          <font>
             <Font size="48.0" />
          </font>
       </Button>
-      <Button fx:id="accessButton" layoutX="46.0" layoutY="593.0" mnemonicParsing="false" onAction="#showAccess" prefWidth="476.0" text="Назначить роль">
+      <Button fx:id="accessButton" layoutX="62.0" layoutY="598.0" mnemonicParsing="false" onAction="#showAccess" prefWidth="476.0" text="Назначить роль">
          <font>
             <Font size="36.0" />
          </font>
       </Button>
-      <Button fx:id="logoutButton" layoutX="46.0" layoutY="40.0" mnemonicParsing="false" onAction="#logout" text="Выйти из аккаунта" />
+      <Button fx:id="logoutButton" layoutX="241.0" layoutY="719.0" mnemonicParsing="false" onAction="#logout" text="Выйти из аккаунта" />
+      <Text layoutX="696.0" layoutY="203.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Добро пожаловать в ресторанный менеджер" wrappingWidth="405.7421875">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -3,20 +3,42 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.restaurantapp.controllers.StartupController">
    <children>
-      <Button fx:id="button" layoutX="251.0" layoutY="200.0" mnemonicParsing="false" onAction="#startup" text="Войти">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" height="400.0" stroke="BLACK" strokeType="INSIDE" width="100.0">
+         <fill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop>
+                     <color>
+                        <Color green="0.5833333134651184" blue="1.0" />
+                     </color>
+                  </Stop>
+                  <Stop offset="1.0">
+                     <color>
+                        <Color red="1.0" />
+                     </color>
+                  </Stop>
+               </stops>
+            </LinearGradient>
+         </fill>
+      </Rectangle>
+      <Button fx:id="button" layoutX="301.0" layoutY="200.0" mnemonicParsing="false" onAction="#startup" text="Войти">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Label fx:id="messageLabel" alignment="TOP_CENTER" layoutX="13.0" layoutY="147.0" prefHeight="17.0" prefWidth="575.0">
+      <Label fx:id="messageLabel" alignment="TOP_CENTER" layoutX="112.0" layoutY="147.0" prefHeight="27.0" prefWidth="476.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
+
    </children>
 </AnchorPane>

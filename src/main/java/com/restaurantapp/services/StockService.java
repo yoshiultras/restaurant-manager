@@ -23,12 +23,12 @@ public class StockService {
     public ObservableList<Ingredient> getIngredients() throws SQLException {
         ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
         Statement statement = connection.createStatement();
-        String query = "SELECT * FROM ingredients;";
+        String query = "SELECT name, unit, ROUND(amount_in_stock, 3) AS stock FROM ingredients;";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             String name = result.getString("name" );
             String unit = result.getString("unit" );
-            double amount_in_stock = result.getDouble("amount_in_stock");
+            double amount_in_stock = result.getDouble("stock");
             ingredients.add(new Ingredient(name, unit, amount_in_stock));
         }
         return ingredients;

@@ -2,8 +2,10 @@ package com.restaurantapp.models;
 
 import javafx.collections.ObservableList;
 
+import java.util.List;
+
 public class Order {
-    private String dishes;
+    private Dishes dishes;
     private String date;
     private String startTime;
     private String endTime;
@@ -11,7 +13,7 @@ public class Order {
     private String client;
     private int table;
 
-    public Order(String dishes, String date, String startTime, String endTime, String waiter, String client, int table) {
+    public Order(Dishes dishes, String date, String startTime, String endTime, String waiter, String client, int table) {
         this.dishes = dishes;
         this.date = date;
         this.startTime = startTime;
@@ -21,7 +23,7 @@ public class Order {
         this.table = table;
     }
 
-    public Order(String dishes, String date, String startTime, String endTime, String waiter, int table) {
+    public Order(Dishes dishes, String date, String startTime, String endTime, String waiter, int table) {
         this.dishes = dishes;
         this.date = date;
         this.startTime = startTime;
@@ -30,11 +32,11 @@ public class Order {
         this.table = table;
     }
 
-    public String getDishes() {
+    public Dishes getDishes() {
         return dishes;
     }
 
-    public void setDishes(String dishes) {
+    public void setDishes(Dishes dishes) {
         this.dishes = dishes;
     }
 

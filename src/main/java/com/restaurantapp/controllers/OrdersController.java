@@ -44,6 +44,8 @@ public class OrdersController implements Initializable, Controller {
             table.setItems(dataService.getOrders());
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
     public void back(ActionEvent event) throws IOException {

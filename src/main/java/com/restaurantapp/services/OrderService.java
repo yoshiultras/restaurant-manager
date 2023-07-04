@@ -2,6 +2,7 @@ package com.restaurantapp.services;
 
 import com.restaurantapp.DatabaseConnector;
 import com.restaurantapp.models.Dish;
+import com.restaurantapp.models.Dishes;
 import com.restaurantapp.models.Ingredient;
 import com.restaurantapp.models.Order;
 import javafx.collections.FXCollections;
@@ -28,7 +29,7 @@ public class OrderService {
         ObservableList<Order> orders = FXCollections.observableArrayList();
         Statement statement = connection.createStatement();
         String query = "SELECT meals.id, meal_date, start_time, end_time, clients.last_name, clients.first_name, clients.second_name, " +
-                "waiters.last_name, waiters.first_name, waiters.second_name, table_id FROM meals JOIN clients ON clients.id = client_id JOIN waiters ON waiters.id = waiter_id;";
+                "waiters.last_name, waiters.first_name, waiters.second_name, table_id FROM meals JOIN clients ON clients.id = client_id JOIN waiters ON waiters.id = waiter_id ORDER BY 2, 1;";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             Order order = order(result);
@@ -37,7 +38,7 @@ public class OrderService {
             orders.add(order);
         }
         query = "SELECT meals.id, meal_date, start_time, end_time, " +
-                "waiters.last_name, waiters.first_name, waiters.second_name, table_id FROM meals JOIN waiters ON waiters.id = waiter_id WHERE client_id IS NULL;";
+                "waiters.last_name, waiters.first_name, waiters.second_name, table_id FROM meals JOIN waiters ON waiters.id = waiter_id WHERE client_id IS NULL ORDER BY 2, 1;";
         result = statement.executeQuery(query);
         while(result.next()){
             Order order = order(result);
@@ -55,10 +56,10 @@ public class OrderService {
         String q1 = "SELECT dish_name FROM orders WHERE meal_id = " + mealId + ";";
         Statement statement1 = connection.createStatement();
         ResultSet newResult = statement1.executeQuery(q1);
-        StringBuilder dishes = new StringBuilder();
+        Dishes dishes = new Dishes();
         while(newResult.next()) {
-            dishes.append(newResult.getString("dish_name")).append(", ");
+            dishes.add(new Dish(newResult.getString("dish_name")));
         }
-        return new Order(dishes.substring(0, dishes.length() - 2), mealDate, startTime, endTime, waiterName, table);
+        return new Order(dishes, mealDate, startTime, endTime, waiterName, table);
     }
 }

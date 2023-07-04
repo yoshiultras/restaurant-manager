@@ -27,8 +27,8 @@ public class Ingredient {
         this.unit = unit;
     }
 
-    public double getAmount() {
-        return amount;
+    public String getAmount() {
+        return amount + " " + unit;
     }
 
     public void setAmount(int amount_in_stock) {
