@@ -11,6 +11,9 @@
 <?import javafx.scene.shape.Rectangle?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.restaurantapp.controllers.RegisterController">
+   <TextField fx:id="lastText" layoutX="173.0" layoutY="109.0" />
+   <TextField fx:id="firstText" layoutX="173.0" layoutY="151.0" />
+   <TextField fx:id="secondText" layoutX="173.0" layoutY="193.0" />
    <TextField fx:id="usernameText" layoutX="360.0" layoutY="109.0" />
    <PasswordField fx:id="passwordText" layoutX="360.0" layoutY="151.0" />
    <PasswordField fx:id="passwordConfirmText" layoutX="360.0" layoutY="193.0" />
@@ -38,10 +41,7 @@
          </LinearGradient>
       </fill>
    </Rectangle>
-   <TextField fx:id="lastText" layoutX="173.0" layoutY="109.0" />
    <Label layoutX="173.0" layoutY="92.0" text="Фамилия" />
-   <TextField fx:id="firstText" layoutX="173.0" layoutY="151.0" />
    <Label layoutX="173.0" layoutY="134.0" text="Имя" />
-   <TextField fx:id="secondText" layoutX="173.0" layoutY="193.0" />
    <Label layoutX="173.0" layoutY="176.0" text="Отчество" />
 </AnchorPane>

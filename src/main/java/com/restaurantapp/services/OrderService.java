@@ -1,9 +1,7 @@
 package com.restaurantapp.services;
 
 import com.restaurantapp.DatabaseConnector;
-import com.restaurantapp.models.Dish;
-import com.restaurantapp.models.Dishes;
-import com.restaurantapp.models.Order;
+import com.restaurantapp.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,6 +9,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public final class OrderService {
     private final Connection connection;
@@ -21,6 +20,18 @@ public final class OrderService {
     }
     public static OrderService getInstance() {
         return INSTANCE;
+    }
+    public void addOrder(LocalDate date, Table table, Waiter waiter, Client client, ObservableList<Dish> dishes) throws SQLException {
+        int id = getId();
+        Statement statement = connection.createStatement();
+        String query = "INSERT INTO meals(id, meal_date, client_id, table_id, waiter_id) VALUES('" + id + "', '"
+                + date.toString() + "', '" + client.getId() + "', '" + table.getId() + "', '" + waiter.getId() + "');";
+        statement.executeUpdate(query);
+        for (Dish dish : dishes) {
+            statement = connection.createStatement();
+            query = "INSERT INTO orders(meal_id, dish_name) VALUES('" + id + "', '" + dish.getName() + "');";
+            statement.executeUpdate(query);
+        }
     }
     public ObservableList<Order> getOrders() throws SQLException {
         ObservableList<Order> orders = FXCollections.observableArrayList();
@@ -42,6 +53,13 @@ public final class OrderService {
             orders.add(order);
         }
         return orders;
+    }
+    private int getId() throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "SELECT id FROM meals ORDER BY 1 DESC LIMIT 1";
+        ResultSet result = statement.executeQuery(query);
+        result.next();
+        return result.getInt("id") + 1;
     }
     private Order order(ResultSet result) throws SQLException {
         int mealId = result.getInt("id");

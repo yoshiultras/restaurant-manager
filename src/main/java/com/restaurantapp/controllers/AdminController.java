@@ -50,20 +50,19 @@ public class AdminController implements Initializable, Controller {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String role = user.getRole();
         switch (role) {
-            case "1":
+            case "Складской менеджер":
                 statsButton.setDisable(true);
                 accessButton.setDisable(true);
                 orderButton.setDisable(true);
                 break;
-            case "2":
+            case "Менеджер ресторана":
                 stockButton.setDisable(true);
                 accessButton.setDisable(true);
                 break;
-            default:
-                statsButton.setDisable(false);
-                stockButton.setDisable(false);
-                accessButton.setDisable(false);
-                orderButton.setDisable(false);
+            case "Директор ресторана":
+                accessButton.setDisable(true);
+                break;
+            case "Админ":
                 break;
         }
     }

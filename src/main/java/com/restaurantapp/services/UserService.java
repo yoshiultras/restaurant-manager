@@ -32,7 +32,7 @@ public final class UserService {
         Statement statement = connection.createStatement();
         password = passwordHashing(password);
         String query = "INSERT INTO users(username, password, role, id, last_name, first_name, second_name) VALUES ('"
-                + username + "', '" + password + "', 0, NULL, '" + lastName + "', '" + firstName + "', + '" + secondName + "')";
+                + username + "', '" + password + "', 'Без роли', NULL, '" + lastName + "', '" + firstName + "', + '" + secondName + "')";
         statement.executeUpdate(query);
         User user = new User(username, password, "0", lastName, firstName, secondName);
         return user;
@@ -52,6 +52,11 @@ public final class UserService {
         String query = "UPDATE users SET password = '" + newPassword + "' WHERE username = '" + username + "' AND password = '" + password + "';";
         statement.executeUpdate(query);
     }
+    public void deleteUser(User user) throws SQLException {
+        Statement statement = connection.createStatement();
+        String query = "DELETE FROM users WHERE username = '" + user.getUsername() + "'";
+        statement.executeUpdate(query);
+    }
     public boolean exists(String username) throws SQLException {
         Statement statement = connection.createStatement();
         String query = "SELECT username, password, role FROM users WHERE username = '" + username + "';";
@@ -65,26 +70,25 @@ public final class UserService {
         String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
         ResultSet result = statement.executeQuery(query);
         if(!result.next()) return null;
-        return new User(result.getString("username"), result.getString("password"), result.getInt("role") + "",
+        return new User(result.getString("username"), result.getString("password"), result.getString("role"),
                 result.getString("last_name"), result.getString("first_name"), result.getString("second_name"));
     }
-    public ObservableList<User> getUsersLowerRole(User user) throws SQLException {
+    public ObservableList<User> getUsers(User user) throws SQLException {
         ObservableList<User> users = FXCollections.observableArrayList();
-        String role = user.getRole();
         String username = user.getUsername();
         Statement statement = connection.createStatement();
-        String query = "SELECT * FROM users WHERE username <> '" + username + "' AND role < '" + role + "';";
+        String query = "SELECT * FROM users WHERE username <> '" + username + "';";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             String name = result.getString("username" );
-            String userRole = result.getInt("role") + "";
+            String userRole = result.getString("role");
             users.add(new User(name, "0000", userRole, result.getString("last_name"), result.getString("first_name"), result.getString("second_name")));
         }
         return users;
     }
     public void updateRole(User user, String newRole) throws SQLException {
         Statement statement = connection.createStatement();
-        String query = "UPDATE users SET role = " + newRole + " WHERE username = '" + user.getUsername() + "';";
+        String query = "UPDATE users SET role = '" + newRole + "' WHERE username = '" + user.getUsername() + "';";
         statement.executeUpdate(query);
     }
     public String passwordHashing(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {

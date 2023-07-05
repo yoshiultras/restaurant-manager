@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -10,29 +11,29 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.restaurantapp.controllers.AccessController">
    <Button layoutX="40.0" layoutY="30.0" mnemonicParsing="false" onAction="#back" text="Назад" />
-   <TableView fx:id="table" layoutX="38.0" layoutY="123.0" prefHeight="733.0" prefWidth="807.0">
+   <TableView fx:id="table" layoutX="38.0" layoutY="123.0" prefHeight="515.0" prefWidth="807.0">
       <columns>
          <TableColumn fx:id="loginColumn" editable="false" prefWidth="199.0" text="Логин" />
-         <TableColumn fx:id="nameColumn" prefWidth="482.0" text="Имя" />
-         <TableColumn fx:id="roleColumn" prefWidth="125.0" text="Уровень доступа" />
+         <TableColumn fx:id="nameColumn" prefWidth="430.0" text="ФИО" />
+         <TableColumn fx:id="roleColumn" prefWidth="177.0" text="Роль" />
       </columns>
    </TableView>
-   <Text layoutX="863.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выдавать уровень доступа можно не выше своего собственного. Доступны данные уровни доступа: 0, 1, 2, 3." wrappingWidth="314.13671875">
+   <Text layoutX="864.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выдавать роль можно не выше своей собственной. Роли от низшей к высшей: Нет роли, Складской менеджер, Менеджер ресторана, Директор Ресторана, Админ." wrappingWidth="314.13671875">
       <font>
          <Font size="18.0" />
       </font>
    </Text>
-   <Text fill="RED" layoutX="863.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Внимание! При выдаче доступа, равного своему, изменить его после выхода из данного меню сможет только сотрудник с ролью выше вашей" wrappingWidth="314.13671875">
+   <Text fill="RED" layoutX="864.0" layoutY="282.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Внимание! При выдаче доступа, равного своему, изменить его после выхода из данного меню сможет только сотрудник с ролью выше вашей" wrappingWidth="314.13671875">
       <font>
          <Font size="18.0" />
       </font>
    </Text>
-   <Label fx:id="roleLabel" layoutX="1059.0" layoutY="416.0" textFill="RED">
+   <Label fx:id="roleLabel" layoutX="953.0" layoutY="403.0" prefHeight="27.0" prefWidth="231.0" textFill="RED">
       <font>
          <Font size="18.0" />
       </font>
    </Label>
-   <Text layoutX="863.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ваш уровень доступа:">
+   <Text layoutX="861.0" layoutY="423.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ваша роль:">
       <font>
          <Font size="18.0" />
       </font>
@@ -42,4 +43,22 @@
          <Font size="18.0" />
       </font>
    </Label>
+   <Button layoutX="861.0" layoutY="670.0" mnemonicParsing="false" onAction="#delete" text="Удалить пользователя" />
+   <Text fill="RED" layoutX="861.0" layoutY="722.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Внимание! Отменить данное действие нельзя" wrappingWidth="294.13671875">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Text>
+   <Text layoutX="860.0" layoutY="631.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выбран пользователь:">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Text>
+   <Label fx:id="userLabel" layoutX="1045.0" layoutY="611.0" prefHeight="27.0" prefWidth="124.0">
+      <font>
+         <Font size="18.0" />
+      </font>
+   </Label>
+   <Button layoutX="39.0" layoutY="670.0" mnemonicParsing="false" onAction="#changeRole" text="Поменять роль" />
+   <ChoiceBox fx:id="roleChoiceBox" layoutX="38.0" layoutY="714.0" prefWidth="150.0" />
 </AnchorPane>

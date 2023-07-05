@@ -16,7 +16,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Button layoutX="489.0" layoutY="359.0" mnemonicParsing="false" onAction="#changeName" text="Поменять имя">
+            <Button layoutX="478.0" layoutY="357.0" mnemonicParsing="false" onAction="#changeName" text="Поменять логин">
                <font>
                   <Font size="24.0" />
                </font>
@@ -41,31 +41,29 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <Pane fx:id="changePane" layoutX="484.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0"
-                  visible="false">
+            <Pane fx:id="changePane" layoutX="484.0" layoutY="561.0" prefHeight="200.0" prefWidth="200.0" visible="false">
                <TextField fx:id="passwordText" layoutX="13.0" layoutY="40.0">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </TextField>
                <TextField fx:id="changeText" layoutX="14.0" layoutY="103.0">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </TextField>
                <Label layoutX="14.0" layoutY="20.0" text="Введите пароль">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </Label>
                <Label fx:id="changeLabel" layoutX="14.0" layoutY="79.0" text="Label">
                   <font>
-                     <Font size="14.0"/>
+                     <Font size="14.0" />
                   </font>
                </Label>
-               <Label fx:id="errorLabel" layoutX="86.0" layoutY="134.0" prefHeight="17.0" prefWidth="23.0"
-                      textAlignment="CENTER" textFill="RED"/>
-               <Button layoutX="74.0" layoutY="161.0" mnemonicParsing="false" onAction="#submitChange" text="Вперед"/>
+               <Label fx:id="errorLabel" layoutX="86.0" layoutY="134.0" prefHeight="17.0" prefWidth="23.0" textAlignment="CENTER" textFill="RED" />
+               <Button layoutX="74.0" layoutY="161.0" mnemonicParsing="false" onAction="#submitChange" text="Вперед" />
             </Pane>
             <Label fx:id="changeSuccessLabel" layoutX="458.0" layoutY="509.0" text="Изменения сохранены" textFill="#1c8d00" visible="false">
                <font>

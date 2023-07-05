@@ -1,9 +1,6 @@
 package com.restaurantapp.services;
 
-import com.restaurantapp.models.Dish;
-import com.restaurantapp.models.Ingredient;
-import com.restaurantapp.models.Order;
-import com.restaurantapp.models.User;
+import com.restaurantapp.models.*;
 import javafx.collections.ObservableList;
 
 import java.io.FileWriter;
@@ -15,6 +12,10 @@ import java.time.format.DateTimeFormatter;
 public final class DataService {
     private static ObservableList<User> usersLowerRole;
     private static ObservableList<Ingredient> ingredients;
+    private static ObservableList<Table> tables;
+    private static ObservableList<Waiter> waiters;
+    private static ObservableList<Client> clients;
+    private static ObservableList<Dish> dishes;
     private static ObservableList<Dish> popularDishes;
     private static ObservableList<Dish> unpopularDishes;
     private static ObservableList<Order> orders;
@@ -22,9 +23,10 @@ public final class DataService {
     private static final StockService stockService = StockService.getInstance();
     private static final OrderService orderService = OrderService.getInstance();
     private static final DishService dishService = DishService.getInstance();
-    public static ObservableList<User> getUsersLowerRole(User user) throws SQLException, IOException {
+    private static final RestaurantService restaurantService = RestaurantService.getInstance();
+    public static ObservableList<User> getUsers(User user) throws SQLException, IOException {
         if (usersLowerRole == null) {
-            usersLowerRole = userService.getUsersLowerRole(user);
+            usersLowerRole = userService.getUsers(user);
             log("getUsers");
         }
         return usersLowerRole;
@@ -42,12 +44,40 @@ public final class DataService {
     public static void updateIngredients() throws SQLException {
         ingredients = stockService.getIngredients();
     }
+    public static ObservableList<Table> getTables() throws IOException, SQLException {
+        if (tables == null) {
+            tables = restaurantService.getTable();
+            log("getDishes");
+        }
+        return tables;
+    }
+    public static ObservableList<Waiter> getWaiters() throws IOException, SQLException {
+        if (waiters == null) {
+            waiters = restaurantService.getWaiters();
+            log("getDishes");
+        }
+        return waiters;
+    }
+    public static ObservableList<Client> getClients() throws IOException, SQLException {
+        if (clients == null) {
+            clients = restaurantService.getClients();
+            log("getDishes");
+        }
+        return clients;
+    }
     public static ObservableList<Order> getOrders() throws SQLException, IOException {
         if (orders == null) {
             orders = orderService.getOrders();
             log("getOrders");
         }
         return orders;
+    }
+    public static ObservableList<Dish> getDishes() throws IOException, SQLException {
+        if (dishes == null) {
+            dishes = dishService.getDishes();
+            log("getDishes");
+        }
+        return dishes;
     }
     public static ObservableList<Dish> getPopularDishes() throws IOException, SQLException {
         if (popularDishes == null) {

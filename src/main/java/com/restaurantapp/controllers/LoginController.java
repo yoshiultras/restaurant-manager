@@ -40,7 +40,7 @@ public class LoginController implements Controller {
         }
         User.login(user);
         String role = user.getRole();
-        if (role.equals("0")) label.setText("Вам пока не выдана роль в системе");
+        if (role.equals("Нет роли")) label.setText("Вам пока не выдана роль в системе");
         else controllerService.changeScene(stage, scene, root, event, "admin.fxml");
     }
     public void toRegistration(ActionEvent event) throws IOException {

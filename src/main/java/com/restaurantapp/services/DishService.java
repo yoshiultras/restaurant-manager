@@ -3,6 +3,8 @@ package com.restaurantapp.services;
 import com.restaurantapp.DatabaseConnector;
 import com.restaurantapp.models.Dish;
 import com.restaurantapp.models.Order;
+import com.restaurantapp.models.Table;
+import com.restaurantapp.models.Waiter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -41,4 +43,17 @@ public final class DishService {
         }
         return dishes;
     }
+
+    public ObservableList<Dish> getDishes() throws SQLException {
+        ObservableList<Dish> dishes = FXCollections.observableArrayList();
+        Statement statement = connection.createStatement();
+        String query = "SELECT name FROM dishes;";
+        ResultSet result = statement.executeQuery(query);
+        while(result.next()){
+            dishes.add(new Dish(result.getString("name")));
+        }
+        return dishes;
+    }
+
+
 }
