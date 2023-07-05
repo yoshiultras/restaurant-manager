@@ -27,13 +27,14 @@ public final class UserService {
         return INSTANCE;
     }
 
-        public User addUser(String username, String password) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
+        public User addUser(String username, String password, String lastName, String firstName, String secondName) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         if(exists(username)) return null;
         Statement statement = connection.createStatement();
         password = passwordHashing(password);
-        String query = "INSERT INTO users(username, password, role, id) VALUES ('" + username + "', '" + password + "', 0, NULL)";
+        String query = "INSERT INTO users(username, password, role, id, last_name, first_name, second_name) VALUES ('"
+                + username + "', '" + password + "', 0, NULL, '" + lastName + "', '" + firstName + "', + '" + secondName + "')";
         statement.executeUpdate(query);
-        User user = new User(username, password, "0");
+        User user = new User(username, password, "0", lastName, firstName, secondName);
         return user;
     }
     public void changeName(User user, String newName) throws SQLException {
@@ -61,22 +62,23 @@ public final class UserService {
     public User userLogin(String username, String password) throws SQLException, NoSuchAlgorithmException, InvalidKeySpecException {
         if(!username.matches("[A-Za-z0-9]+") || !password.matches("[A-Za-z0-9]+")) return null;
         Statement statement = connection.createStatement();
-        String query = "SELECT username, password, role FROM users WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
+        String query = "SELECT * FROM users WHERE username = '" + username + "' AND password = '" + passwordHashing(password) + "';";
         ResultSet result = statement.executeQuery(query);
         if(!result.next()) return null;
-        return new User(result.getString("username"), result.getString("password"), result.getInt("role") + "");
+        return new User(result.getString("username"), result.getString("password"), result.getInt("role") + "",
+                result.getString("last_name"), result.getString("first_name"), result.getString("second_name"));
     }
     public ObservableList<User> getUsersLowerRole(User user) throws SQLException {
         ObservableList<User> users = FXCollections.observableArrayList();
         String role = user.getRole();
         String username = user.getUsername();
         Statement statement = connection.createStatement();
-        String query = "SELECT username, role FROM users WHERE username <> '" + username + "' AND role < '" + role + "';";
+        String query = "SELECT * FROM users WHERE username <> '" + username + "' AND role < '" + role + "';";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             String name = result.getString("username" );
             String userRole = result.getInt("role") + "";
-            users.add(new User(name, "0000", userRole));
+            users.add(new User(name, "0000", userRole, result.getString("last_name"), result.getString("first_name"), result.getString("second_name")));
         }
         return users;
     }

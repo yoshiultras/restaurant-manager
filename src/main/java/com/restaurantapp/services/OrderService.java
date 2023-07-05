@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class OrderService {
+public final class OrderService {
     private final Connection connection;
     private final static OrderService INSTANCE = new OrderService();
 

@@ -8,43 +8,38 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0"
-            prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.restaurantapp.controllers.AccessController">
-   <Button layoutX="40.0" layoutY="30.0" mnemonicParsing="false" onAction="#back" text="Назад"/>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="900.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.restaurantapp.controllers.AccessController">
+   <Button layoutX="40.0" layoutY="30.0" mnemonicParsing="false" onAction="#back" text="Назад" />
    <TableView fx:id="table" layoutX="38.0" layoutY="123.0" prefHeight="733.0" prefWidth="807.0">
       <columns>
-         <TableColumn fx:id="loginColumn" editable="false" prefWidth="548.0" text="Логин"/>
-         <TableColumn fx:id="roleColumn" prefWidth="258.0" text="Уровень доступа"/>
+         <TableColumn fx:id="loginColumn" editable="false" prefWidth="199.0" text="Логин" />
+         <TableColumn fx:id="nameColumn" prefWidth="482.0" text="Имя" />
+         <TableColumn fx:id="roleColumn" prefWidth="125.0" text="Уровень доступа" />
       </columns>
    </TableView>
-   <Text layoutX="863.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Выдавать уровень доступа можно не выше своего собственного. Доступны данные уровни доступа: 0, 1, 2, 3."
-         wrappingWidth="314.13671875">
+   <Text layoutX="863.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Выдавать уровень доступа можно не выше своего собственного. Доступны данные уровни доступа: 0, 1, 2, 3." wrappingWidth="314.13671875">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Text>
-   <Text fill="RED" layoutX="863.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0"
-         text="Внимание! При выдаче доступа, равного своему, изменить его после выхода из данного меню сможет только сотрудник с ролью выше вашей"
-         wrappingWidth="314.13671875">
+   <Text fill="RED" layoutX="863.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Внимание! При выдаче доступа, равного своему, изменить его после выхода из данного меню сможет только сотрудник с ролью выше вашей" wrappingWidth="314.13671875">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Text>
    <Label fx:id="roleLabel" layoutX="1059.0" layoutY="416.0" textFill="RED">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Label>
    <Text layoutX="863.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ваш уровень доступа:">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Text>
    <Label fx:id="errorLabel" layoutX="40.0" layoutY="100.0" text="Label">
       <font>
-         <Font size="18.0"/>
+         <Font size="18.0" />
       </font>
    </Label>
 </AnchorPane>

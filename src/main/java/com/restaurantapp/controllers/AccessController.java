@@ -32,7 +32,7 @@ public class AccessController implements Initializable, Controller {
     @FXML
     private TableView<User> table;
     @FXML
-    private TableColumn<User, String> loginColumn;
+    private TableColumn<User, String> loginColumn, nameColumn;
     @FXML
     private TableColumn<User, String> roleColumn;
     private final UserService userService = UserService.getInstance();
@@ -43,6 +43,7 @@ public class AccessController implements Initializable, Controller {
         errorLabel.setText("");
         loginColumn.setCellValueFactory(new PropertyValueFactory<User, String>("username"));
         roleColumn.setCellValueFactory(new PropertyValueFactory<User, String>("role"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<User, String>("fullName"));
         roleColumn.setCellFactory(TextFieldTableCell.forTableColumn());
         roleColumn.setOnEditCommit(event -> {
             User user = event.getRowValue();

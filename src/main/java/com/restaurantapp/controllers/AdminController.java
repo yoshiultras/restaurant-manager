@@ -19,7 +19,7 @@ public class AdminController implements Initializable, Controller {
     private Scene scene;
     private Parent root;
     @FXML
-    private Button profileButton, accessButton, stockButton, orderButton;
+    private Button profileButton, accessButton, stockButton, orderButton, statsButton;
     private final User user = User.getUser();
     private boolean passwordChange;
     private final ControllerService controllerService = ControllerService.getInstance();
@@ -39,6 +39,9 @@ public class AdminController implements Initializable, Controller {
     public void showOrders(ActionEvent event) throws IOException {
         controllerService.changeScene(stage, scene, root, event, "orders.fxml");
     }
+    public void showStats(ActionEvent event) throws IOException {
+        controllerService.changeScene(stage, scene, root, event, "stats.fxml");
+    }
     public void logout(ActionEvent event) throws IOException {
         controllerService.changeScene(stage, scene, root, event, "login.fxml");
     }
@@ -48,6 +51,7 @@ public class AdminController implements Initializable, Controller {
         String role = user.getRole();
         switch (role) {
             case "1":
+                statsButton.setDisable(true);
                 accessButton.setDisable(true);
                 orderButton.setDisable(true);
                 break;
@@ -56,6 +60,7 @@ public class AdminController implements Initializable, Controller {
                 accessButton.setDisable(true);
                 break;
             default:
+                statsButton.setDisable(false);
                 stockButton.setDisable(false);
                 accessButton.setDisable(false);
                 orderButton.setDisable(false);

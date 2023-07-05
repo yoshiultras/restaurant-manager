@@ -25,26 +25,31 @@ public class RegisterController implements Controller {
     private final ControllerService controllerService = ControllerService.getInstance();
 
     @FXML
-    private TextField usernameText;
+    private TextField usernameText, lastText, firstText, secondText;
     @FXML
-    private PasswordField passwordText;
-    @FXML
-    private PasswordField passwordConfirmText;
+    private PasswordField passwordText, passwordConfirmText;
     @FXML
     private Label label;
 
     public void register(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException, IOException {
         String username = usernameText.getText();
         String password = passwordText.getText();
+        String lastName = lastText.getText();
+        String firstName = firstText.getText();
+        String secondName = secondText.getText();
         if (!password.equals(passwordConfirmText.getText())) {
             label.setText("Пароли должны совпадать");
+            return;
+        }
+        if (!lastName.matches("[А-Яа-я]+") || !firstName.matches("[А-Яа-я]+") || !secondName.matches("[А-Яа-я]+")) {
+            label.setText("Неверные данные");
             return;
         }
         if (!username.matches("[A-Za-z0-9]+") || !password.matches("[A-Za-z0-9]+")) {
             label.setText("Пароль и логин должны содержать только цифры и латинские буквы");
             return;
         }
-        if (userService.addUser(username, password) != null) {
+        if (userService.addUser(username, password, lastName, firstName, secondName) != null) {
             DataService.updateUsers();
             toLogin(event);
         } else {

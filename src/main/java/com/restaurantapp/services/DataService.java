@@ -1,5 +1,6 @@
 package com.restaurantapp.services;
 
+import com.restaurantapp.models.Dish;
 import com.restaurantapp.models.Ingredient;
 import com.restaurantapp.models.Order;
 import com.restaurantapp.models.User;
@@ -14,10 +15,13 @@ import java.time.format.DateTimeFormatter;
 public final class DataService {
     private static ObservableList<User> usersLowerRole;
     private static ObservableList<Ingredient> ingredients;
+    private static ObservableList<Dish> popularDishes;
+    private static ObservableList<Dish> unpopularDishes;
     private static ObservableList<Order> orders;
     private static final UserService userService = UserService.getInstance();
     private static final StockService stockService = StockService.getInstance();
     private static final OrderService orderService = OrderService.getInstance();
+    private static final DishService dishService = DishService.getInstance();
     public static ObservableList<User> getUsersLowerRole(User user) throws SQLException, IOException {
         if (usersLowerRole == null) {
             usersLowerRole = userService.getUsersLowerRole(user);
@@ -44,6 +48,20 @@ public final class DataService {
             log("getOrders");
         }
         return orders;
+    }
+    public static ObservableList<Dish> getPopularDishes() throws IOException, SQLException {
+        if (popularDishes == null) {
+            popularDishes = dishService.getPopularDishes();
+            log("getPopularDishes");
+        }
+        return popularDishes;
+    }
+    public static ObservableList<Dish> getUnpopularDishes() throws IOException, SQLException {
+        if (unpopularDishes == null) {
+            unpopularDishes = dishService.getUnpopularDishes();
+            log("getUnpopula rDishes");
+        }
+        return unpopularDishes;
     }
     private static void log(String log) throws IOException {
         FileWriter fw = new FileWriter("logs.txt", true);

@@ -10,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class StockService {
+public final class StockService {
     private final Connection connection;
     private final static StockService INSTANCE = new StockService();
 
@@ -23,7 +23,7 @@ public class StockService {
     public ObservableList<Ingredient> getIngredients() throws SQLException {
         ObservableList<Ingredient> ingredients = FXCollections.observableArrayList();
         Statement statement = connection.createStatement();
-        String query = "SELECT name, unit, ROUND(amount_in_stock, 3) AS stock FROM ingredients;";
+        String query = "SELECT name, unit, ROUND(amount_in_stock, 3) AS stock FROM ingredients ORDER BY 2, 3 ASC;";
         ResultSet result = statement.executeQuery(query);
         while(result.next()){
             String name = result.getString("name" );

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DatabaseConnector {
+public final class DatabaseConnector {
     private static final String DB_URL = "jdbc:mysql://std-mysql.ist.mospolytech.ru:3306/std_2313_restaurant";
     private static final String DB_USER = "std_2313_restaurant";
     private static final String DB_PASSWORD = "12345678";
