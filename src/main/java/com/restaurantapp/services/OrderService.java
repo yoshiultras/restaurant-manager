@@ -57,10 +57,10 @@ public final class OrderService {
     public void delete(Order order) throws SQLException {
         int id = order.getId();
         Statement statement = connection.createStatement();
-        String query = "DELETE FROM meals WHERE id = " + id + ";";
+        String query = "DELETE FROM orders WHERE meal_id = " + id + ";";
         statement.executeUpdate(query);
         statement = connection.createStatement();
-        query = "DELETE FROM orders WHERE meal_id = " + id + ";";
+        query = "DELETE FROM meals WHERE id = " + id + ";";
         statement.executeUpdate(query);
     }
     private int getId() throws SQLException {

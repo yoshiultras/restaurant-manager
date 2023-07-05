@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public final class DataStorage {
-    private static ObservableList<User> usersLowerRole;
+    private static ObservableList<User> users;
     private static ObservableList<Ingredient> ingredients;
     private static ObservableList<Table> tables;
     private static ObservableList<Waiter> waiters;
@@ -26,14 +26,14 @@ public final class DataStorage {
     private static final DishService dishService = DishService.getInstance();
     private static final RestaurantService restaurantService = RestaurantService.getInstance();
     public static ObservableList<User> getUsers(User user) throws SQLException, IOException {
-        if (usersLowerRole == null) {
-            usersLowerRole = userService.getUsers(user);
+        if (users == null) {
+            users = userService.getUsers(user);
             log("getUsers");
         }
-        return usersLowerRole;
+        return users;
     }
     public static void updateUsers() throws SQLException {
-        usersLowerRole = null;
+        users = null;
     }
     public static ObservableList<Ingredient> getIngredients() throws SQLException, IOException {
         if (ingredients == null) {
@@ -48,21 +48,21 @@ public final class DataStorage {
     public static ObservableList<Table> getTables() throws IOException, SQLException {
         if (tables == null) {
             tables = restaurantService.getTable();
-            log("getDishes");
+            log("getTables");
         }
         return tables;
     }
     public static ObservableList<Waiter> getWaiters() throws IOException, SQLException {
         if (waiters == null) {
             waiters = restaurantService.getWaiters();
-            log("getDishes");
+            log("getWaiters");
         }
         return waiters;
     }
     public static ObservableList<Client> getClients() throws IOException, SQLException {
         if (clients == null) {
             clients = restaurantService.getClients();
-            log("getDishes");
+            log("getClients");
         }
         return clients;
     }
@@ -90,7 +90,7 @@ public final class DataStorage {
     public static ObservableList<Dish> getUnpopularDishes() throws IOException, SQLException {
         if (unpopularDishes == null) {
             unpopularDishes = dishService.getUnpopularDishes();
-            log("getUnpopula rDishes");
+            log("getUnpopularDishes");
         }
         return unpopularDishes;
     }

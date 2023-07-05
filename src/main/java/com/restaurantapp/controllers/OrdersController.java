@@ -53,7 +53,7 @@ public class OrdersController implements Initializable, Controller {
         endColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("endTime"));
         waiterColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("waiter"));
         clientColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("client"));
-        dishColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("dishes"));
+        dishColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("dishe"));
         tableColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("table"));
         TableView.TableViewSelectionModel<Order> selectionModel = table.getSelectionModel();
         selectionModel.selectedItemProperty().addListener((val, oldVal, newVal) -> {
@@ -86,8 +86,11 @@ public class OrdersController implements Initializable, Controller {
         }
         errorLabel.setVisible(false);
         orderService.addOrder(date, table1, waiter, client, addedDishes);
+        //берем старый список
         ObservableList<Order> newList = table.getItems();
+        //добавляем новый заказ
         newList.add(new Order(1, new Dishes(addedDishes), date.toString(), "", "", waiter.toString(), client.toString(), table1.getId()));
+        //добавляем список
         table.setItems(newList);
         addedDishes.clear();
     }
@@ -96,8 +99,12 @@ public class OrdersController implements Initializable, Controller {
             errorLabel.setText("Не выбран заказ");
             return;
         }
+        //берем старый список
         ObservableList<Order> newList = table.getItems();
+        //удаляем заказ
         newList.remove(selectedOrder);
+        orderService.delete(selectedOrder);
+        //добавляем список
         table.setItems(newList);
     }
     public void back(ActionEvent event) throws IOException {

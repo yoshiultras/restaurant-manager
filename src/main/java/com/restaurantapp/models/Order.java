@@ -3,6 +3,7 @@ package com.restaurantapp.models;
 public class Order {
     private int id;
     private Dishes dishes;
+    private String dishe;
     private String date;
     private String startTime;
     private String endTime;
@@ -19,6 +20,7 @@ public class Order {
         this.client = client;
         this.table = table;
         this.id = id;
+        dishe = dishes.toString();
     }
 
     public Order(int id, Dishes dishes, String date, String startTime, String endTime, String waiter, int table) {
@@ -29,10 +31,13 @@ public class Order {
         this.endTime = endTime;
         this.waiter = waiter;
         this.table = table;
+        dishe = dishes.toString();
     }
 
     public Dishes getDishes() {
         return dishes;
+    }public String getDishe() {
+        return dishe;
     }
 
     public void setDishes(Dishes dishes) {
