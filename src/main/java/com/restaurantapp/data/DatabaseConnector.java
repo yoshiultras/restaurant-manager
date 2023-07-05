@@ -1,4 +1,4 @@
-package com.restaurantapp;
+package com.restaurantapp.data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

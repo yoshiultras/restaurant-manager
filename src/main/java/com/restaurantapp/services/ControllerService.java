@@ -1,5 +1,6 @@
 package com.restaurantapp.services;
 
+import com.restaurantapp.View;
 import com.restaurantapp.controllers.Controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -15,15 +16,11 @@ public final class ControllerService {
     public static ControllerService getInstance() {
         return INSTANCE;
     }
-    public Controller changeScene(Stage stage, Scene scene, Parent root, ActionEvent event, String fxml) throws IOException {
+    public Controller changeScene(Parent root, ActionEvent event, String fxml) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource(fxml));
         root = loader.load();
         Controller controller = loader.getController();
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-        stage.centerOnScreen();
+        View.setView(event, root);
         return controller;
     }
 }

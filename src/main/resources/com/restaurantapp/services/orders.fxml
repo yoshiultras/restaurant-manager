@@ -40,4 +40,5 @@
    <Text layoutX="459.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Официант" />
    <Text layoutX="646.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Клиент" />
    <Text layoutX="824.0" layoutY="729.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Блюдо" />
+   <Button layoutX="31.0" layoutY="825.0" mnemonicParsing="false" onAction="#deleteOrder" text="Удалить выбранный заказ" />
 </AnchorPane>

@@ -18,8 +18,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public class ProfileController implements Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     @FXML
     private Pane changePane;
@@ -39,7 +37,7 @@ public class ProfileController implements Controller {
         roleLabel.setText(user.getRole() + "");
     }
     public void back(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "admin.fxml");
+        controllerService.changeScene(root, event, "admin.fxml");
     }
     public void changeName() {
         errorLabel.setText("");

@@ -2,7 +2,7 @@ package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.Ingredient;
 import com.restaurantapp.services.ControllerService;
-import com.restaurantapp.services.DataService;
+import com.restaurantapp.data.DataStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,8 +19,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class StockController implements Initializable, Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     private final ControllerService controllerService = ControllerService.getInstance();
     @FXML
@@ -31,7 +29,7 @@ public class StockController implements Initializable, Controller {
     private TableColumn<Ingredient, String> amountColumn;
 
     public void back(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "admin.fxml");
+        controllerService.changeScene(root, event, "admin.fxml");
     }
 
     @Override
@@ -40,7 +38,7 @@ public class StockController implements Initializable, Controller {
         unitColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("unit"));
         amountColumn.setCellValueFactory(new PropertyValueFactory<Ingredient, String>("amount"));
         try {
-            table.setItems(DataService.getIngredients());
+            table.setItems(DataStorage.getIngredients());
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }

@@ -1,13 +1,21 @@
 package com.restaurantapp.models;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class Dishes {
-    private ArrayList<Dish> dishes;
+    private ObservableList<Dish> dishes;
 
     public Dishes() {
-        this.dishes = new ArrayList<>();
+        this.dishes = FXCollections.observableArrayList();
     }
+
+    public Dishes(ObservableList<Dish> dishes) {
+        this.dishes = dishes;
+    }
+
     public void add(Dish dish) {
         dishes.add(dish);
     }

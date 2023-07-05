@@ -1,6 +1,7 @@
-package com.restaurantapp.services;
+package com.restaurantapp.data;
 
 import com.restaurantapp.models.*;
+import com.restaurantapp.services.*;
 import javafx.collections.ObservableList;
 
 import java.io.FileWriter;
@@ -9,7 +10,7 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public final class DataService {
+public final class DataStorage {
     private static ObservableList<User> usersLowerRole;
     private static ObservableList<Ingredient> ingredients;
     private static ObservableList<Table> tables;

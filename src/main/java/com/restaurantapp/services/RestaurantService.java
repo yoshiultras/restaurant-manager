@@ -1,6 +1,6 @@
 package com.restaurantapp.services;
 
-import com.restaurantapp.DatabaseConnector;
+import com.restaurantapp.data.DatabaseConnector;
 import com.restaurantapp.models.Client;
 import com.restaurantapp.models.Table;
 import com.restaurantapp.models.Waiter;
@@ -12,7 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class RestaurantService {
+public final class RestaurantService {
     private final Connection connection;
     private final static RestaurantService INSTANCE = new RestaurantService();
     public RestaurantService() {

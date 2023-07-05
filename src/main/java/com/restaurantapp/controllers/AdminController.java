@@ -15,8 +15,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AdminController implements Initializable, Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     @FXML
     private Button profileButton, accessButton, stockButton, orderButton, statsButton;
@@ -25,25 +23,25 @@ public class AdminController implements Initializable, Controller {
     private final ControllerService controllerService = ControllerService.getInstance();
 
     public void showProfile(ActionEvent event) throws IOException {
-        ProfileController profileController = (ProfileController) controllerService.changeScene(stage, scene, root, event, "profile.fxml");
+        ProfileController profileController = (ProfileController) controllerService.changeScene(root, event, "profile.fxml");
         profileController.showInfo();
         profileController.changeSuccessLabel.setVisible(false);
     }
 
     public void showAccess(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "access.fxml");
+        controllerService.changeScene(root, event, "access.fxml");
     }
     public void showStock(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "stock.fxml");
+        controllerService.changeScene(root, event, "stock.fxml");
     }
     public void showOrders(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "orders.fxml");
+        controllerService.changeScene(root, event, "orders.fxml");
     }
     public void showStats(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "stats.fxml");
+        controllerService.changeScene(root, event, "stats.fxml");
     }
     public void logout(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "login.fxml");
+        controllerService.changeScene(root, event, "login.fxml");
     }
 
     @Override
@@ -59,7 +57,7 @@ public class AdminController implements Initializable, Controller {
                 stockButton.setDisable(true);
                 accessButton.setDisable(true);
                 break;
-            case "Директор ресторана":
+            case "Директор":
                 accessButton.setDisable(true);
                 break;
             case "Админ":

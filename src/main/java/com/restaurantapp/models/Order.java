@@ -1,6 +1,7 @@
 package com.restaurantapp.models;
 
 public class Order {
+    private int id;
     private Dishes dishes;
     private String date;
     private String startTime;
@@ -9,7 +10,7 @@ public class Order {
     private String client;
     private int table;
 
-    public Order(Dishes dishes, String date, String startTime, String endTime, String waiter, String client, int table) {
+    public Order(int id, Dishes dishes, String date, String startTime, String endTime, String waiter, String client, int table) {
         this.dishes = dishes;
         this.date = date;
         this.startTime = startTime;
@@ -17,9 +18,11 @@ public class Order {
         this.waiter = waiter;
         this.client = client;
         this.table = table;
+        this.id = id;
     }
 
-    public Order(Dishes dishes, String date, String startTime, String endTime, String waiter, int table) {
+    public Order(int id, Dishes dishes, String date, String startTime, String endTime, String waiter, int table) {
+        this.id = id;
         this.dishes = dishes;
         this.date = date;
         this.startTime = startTime;
@@ -82,5 +85,8 @@ public class Order {
 
     public void setTable(int table) {
         this.table = table;
+    }
+    public int getId() {
+        return id;
     }
 }

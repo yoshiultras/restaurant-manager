@@ -2,10 +2,8 @@ package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.User;
 import com.restaurantapp.services.ControllerService;
-import com.restaurantapp.services.DataService;
+import com.restaurantapp.data.DataStorage;
 import com.restaurantapp.services.UserService;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,7 +16,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -28,8 +25,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class AccessController implements Initializable, Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     private final User user = User.getUser();
     private User selectedUser;
@@ -62,7 +57,7 @@ public class AccessController implements Initializable, Controller {
 
         });
         try {
-            table.setItems(DataService.getUsers(user));
+            table.setItems(DataStorage.getUsers(user));
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -97,10 +92,10 @@ public class AccessController implements Initializable, Controller {
         selectedUser.setRole(role);
         userService.updateRole(selectedUser, role);
         errorLabel.setTextFill(new Color(0, 0.5, 0, 1));
-        errorLabel.setText("Пользователю " + user.getUsername() + " был выдан уровень доступа " + role);
+        errorLabel.setText("Пользователю " + selectedUser.getUsername() + " был выдан уровень доступа " + role);
     }
     public void back(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "admin.fxml");
+        controllerService.changeScene(root, event, "admin.fxml");
     }
     private boolean acceptRole(String role) {
         return Integer.parseInt(user.getRole()) >= Integer.parseInt(role);

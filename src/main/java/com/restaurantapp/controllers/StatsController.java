@@ -2,7 +2,7 @@ package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.Dish;
 import com.restaurantapp.services.ControllerService;
-import com.restaurantapp.services.DataService;
+import com.restaurantapp.data.DataStorage;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,8 +18,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class StatsController implements Initializable, Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     @FXML
     private Label bestLabel1, bestLabel2, bestLabel3, worstLabel1, worstLabel2, worstLabel3;
@@ -28,8 +26,8 @@ public class StatsController implements Initializable, Controller {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try {
-            List<Dish> popular = DataService.getPopularDishes();
-            List<Dish> unpopular = DataService.getUnpopularDishes();
+            List<Dish> popular = DataStorage.getPopularDishes();
+            List<Dish> unpopular = DataStorage.getUnpopularDishes();
             bestLabel1.setText(popular.get(0).getName());
             bestLabel2.setText(popular.get(1).getName());
             bestLabel3.setText(popular.get(2).getName());
@@ -41,6 +39,6 @@ public class StatsController implements Initializable, Controller {
         }
     }
     public void back(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "admin.fxml");
+        controllerService.changeScene(root, event, "admin.fxml");
     }
 }

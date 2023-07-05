@@ -1,6 +1,6 @@
 package com.restaurantapp.services;
 
-import com.restaurantapp.DatabaseConnector;
+import com.restaurantapp.data.DatabaseConnector;
 import com.restaurantapp.models.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,6 +54,15 @@ public final class OrderService {
         }
         return orders;
     }
+    public void delete(Order order) throws SQLException {
+        int id = order.getId();
+        Statement statement = connection.createStatement();
+        String query = "DELETE FROM meals WHERE id = " + id + ";";
+        statement.executeUpdate(query);
+        statement = connection.createStatement();
+        query = "DELETE FROM orders WHERE meal_id = " + id + ";";
+        statement.executeUpdate(query);
+    }
     private int getId() throws SQLException {
         Statement statement = connection.createStatement();
         String query = "SELECT id FROM meals ORDER BY 1 DESC LIMIT 1";
@@ -75,6 +84,6 @@ public final class OrderService {
         while(newResult.next()) {
             dishes.add(new Dish(newResult.getString("dish_name")));
         }
-        return new Order(dishes, mealDate, startTime, endTime, waiterName, table);
+        return new Order(mealId, dishes, mealDate, startTime, endTime, waiterName, table);
     }
 }

@@ -1,6 +1,6 @@
 package com.restaurantapp.services;
 
-import com.restaurantapp.DatabaseConnector;
+import com.restaurantapp.data.DatabaseConnector;
 import com.restaurantapp.models.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

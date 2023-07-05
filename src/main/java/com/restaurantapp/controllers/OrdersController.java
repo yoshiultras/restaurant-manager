@@ -2,7 +2,7 @@ package com.restaurantapp.controllers;
 
 import com.restaurantapp.models.*;
 import com.restaurantapp.services.ControllerService;
-import com.restaurantapp.services.DataService;
+import com.restaurantapp.data.DataStorage;
 import com.restaurantapp.services.OrderService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,12 +22,11 @@ import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class OrdersController implements Initializable, Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     private final ControllerService controllerService = ControllerService.getInstance();
     private final OrderService orderService = OrderService.getInstance();
     private ObservableList<Dish> addedDishes = FXCollections.observableArrayList();
+    private Order selectedOrder;
     @FXML
     private TableView<Order> table;
     @FXML
@@ -56,12 +55,19 @@ public class OrdersController implements Initializable, Controller {
         clientColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("client"));
         dishColumn.setCellValueFactory(new PropertyValueFactory<Order, String>("dishes"));
         tableColumn.setCellValueFactory(new PropertyValueFactory<Order, Integer>("table"));
+        TableView.TableViewSelectionModel<Order> selectionModel = table.getSelectionModel();
+        selectionModel.selectedItemProperty().addListener((val, oldVal, newVal) -> {
+            if(newVal != null) {
+                selectedOrder = newVal;
+            }
+
+        });
         try {
-            table.setItems(DataService.getOrders());
-            tablePicker.setItems(DataService.getTables());
-            waiterPicker.setItems(DataService.getWaiters());
-            clientPicker.setItems(DataService.getClients());
-            dishPicker.setItems(DataService.getDishes());
+            table.setItems(DataStorage.getOrders());
+            tablePicker.setItems(DataStorage.getTables());
+            waiterPicker.setItems(DataStorage.getWaiters());
+            clientPicker.setItems(DataStorage.getClients());
+            dishPicker.setItems(DataStorage.getDishes());
         } catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
@@ -80,9 +86,21 @@ public class OrdersController implements Initializable, Controller {
         }
         errorLabel.setVisible(false);
         orderService.addOrder(date, table1, waiter, client, addedDishes);
+        ObservableList<Order> newList = table.getItems();
+        newList.add(new Order(1, new Dishes(addedDishes), date.toString(), "", "", waiter.toString(), client.toString(), table1.getId()));
+        table.setItems(newList);
         addedDishes.clear();
     }
+    public void deleteOrder(ActionEvent event) throws SQLException {
+        if (selectedOrder == null) {
+            errorLabel.setText("Не выбран заказ");
+            return;
+        }
+        ObservableList<Order> newList = table.getItems();
+        newList.remove(selectedOrder);
+        table.setItems(newList);
+    }
     public void back(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "admin.fxml");
+        controllerService.changeScene(root, event, "admin.fxml");
     }
 }

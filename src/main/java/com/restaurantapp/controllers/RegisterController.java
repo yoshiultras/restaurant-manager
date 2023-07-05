@@ -1,7 +1,7 @@
 package com.restaurantapp.controllers;
 
 import com.restaurantapp.services.ControllerService;
-import com.restaurantapp.services.DataService;
+import com.restaurantapp.data.DataStorage;
 import com.restaurantapp.services.UserService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +18,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public class RegisterController implements Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     private final UserService userService = UserService.getInstance();
     private final ControllerService controllerService = ControllerService.getInstance();
@@ -50,13 +48,13 @@ public class RegisterController implements Controller {
             return;
         }
         if (userService.addUser(username, password, lastName, firstName, secondName) != null) {
-            DataService.updateUsers();
+            DataStorage.updateUsers();
             toLogin(event);
         } else {
             label.setText("Данный логин занят");
         }
     }
     public void toLogin(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "login.fxml");
+        controllerService.changeScene(root, event, "login.fxml");
     }
 }

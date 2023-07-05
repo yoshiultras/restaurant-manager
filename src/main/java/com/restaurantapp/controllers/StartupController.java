@@ -1,6 +1,6 @@
 package com.restaurantapp.controllers;
 
-import com.restaurantapp.DatabaseConnector;
+import com.restaurantapp.data.DatabaseConnector;
 import com.restaurantapp.services.ControllerService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,8 +16,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StartupController implements Initializable, Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     private final ControllerService controllerService = ControllerService.getInstance();
     @FXML
@@ -26,7 +24,7 @@ public class StartupController implements Initializable, Controller {
     private Button button;
 
     public void startup(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "login.fxml");
+        controllerService.changeScene(root, event, "login.fxml");
     }
 
     @Override

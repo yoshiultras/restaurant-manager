@@ -15,4 +15,6 @@ module com.restaurantapp {
     exports com.restaurantapp.services;
     opens com.restaurantapp.services to javafx.fxml;
     opens com.restaurantapp to javafx.fxml;
+    exports com.restaurantapp.data;
+    opens com.restaurantapp.data to javafx.fxml;
 }

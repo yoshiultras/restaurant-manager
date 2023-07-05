@@ -18,8 +18,6 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 public class LoginController implements Controller {
-    private Stage stage;
-    private Scene scene;
     private Parent root;
     private final UserService userService = UserService.getInstance();
     private final ControllerService controllerService = ControllerService.getInstance();
@@ -41,10 +39,10 @@ public class LoginController implements Controller {
         User.login(user);
         String role = user.getRole();
         if (role.equals("Нет роли")) label.setText("Вам пока не выдана роль в системе");
-        else controllerService.changeScene(stage, scene, root, event, "admin.fxml");
+        else controllerService.changeScene(root, event, "admin.fxml");
     }
     public void toRegistration(ActionEvent event) throws IOException {
-        controllerService.changeScene(stage, scene, root, event, "registration.fxml");
+        controllerService.changeScene(root, event, "registration.fxml");
     }
 
 }
